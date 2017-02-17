@@ -1,0 +1,18 @@
+# vs
+.vscode
+packages
+
+# Local development
+*.env
+*.dev
+.DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# ignore
+testCpp
+ModelingProject1
+Debug
+matlab_simulink_testlink

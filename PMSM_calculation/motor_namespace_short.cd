@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractAnalyticalAnalyser" Collapsed="true">
+    <Position X="22.75" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>motor\AbstractAnalyticalAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractResults" Collapsed="true">
+    <Position X="6.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAAAAAAY=</HashCode>
+      <FileName>motor\AbstractAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractFEMAnalyser" Collapsed="true">
+    <Position X="17.5" Y="9.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAIAAACAACAAAAAQAQAAAAAAQJAAAAwAgA=</HashCode>
+      <FileName>motor\AbstractFEMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractFEMResults" Collapsed="true">
+    <Position X="4" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>motor\AbstractFEMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractMMAnalyser" Collapsed="true">
+    <Position X="20.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAQIAAAAAAAA=</HashCode>
+      <FileName>motor\AbstractMMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractMotor" Collapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAsAOEAAAAAAAAABAAAAAAMAAAEAEBADAAAQA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractMotorPart">
+    <Position X="5.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAIAIAgAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractRotor" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAgAAAAAAAAAAABAAAIAAAAAIAAAEAAEASAAAAEAA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractStator" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAgAAAAAAAAIABAAAAAACAAAgGAA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractAirgap" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAgAAAAAAAAA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.GeneralParameters" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>motor\AbstractMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractStaticAnalyser" Collapsed="true">
+    <Position X="14.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAIAAAAAACAAgAAEAAAAQAAAAAAQIAAAgAAAA=</HashCode>
+      <FileName>motor\AbstractStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractTransientAnalyser" Collapsed="true">
+    <Position X="17.5" Y="10.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAQMAAAIACAQAAygAAgAAIQAAQgAAAAgYIAAIAAAAA=</HashCode>
+      <FileName>motor\AbstractTransientAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.TransientStepArgs" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAABgABAAAAAAAAAAAAACAAAAAAgAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>motor\AbstractTransientAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.TransientResults" Collapsed="true">
+    <Position X="2.25" Y="10.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAADIAAAAQAAACAAAAAQEAEAgAAIAACAAAAAAAAQ=</HashCode>
+      <FileName>motor\AbstractTransientAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AirgapNormal" Collapsed="true">
+    <Position X="7.5" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAQAAAQQAAAAAEAgAAAEAAEAA=</HashCode>
+      <FileName>motor\AirgapNormal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.Stator3Phase" Collapsed="true">
+    <Position X="5.75" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Private" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="calc_from_geometryOfMotor.motor.Stator3Phase.Coil" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>motor\Stator3Phase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="calc_from_geometryOfMotor.motor.Stator3Phase.Circuit" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>motor\Stator3Phase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>I0IAIACIATAEAADCZhkALAAAAwAIFAQAACA0gABgaCg=</HashCode>
+      <FileName>motor\Stator3Phase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.Constants" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>motor\SupportClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.ParamValidationInfo" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAACA=</HashCode>
+      <FileName>motor\SupportClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.Transient3PhaseMotorAnalyser" Collapsed="true">
+    <Position X="17.25" Y="11.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAEAAACCAEAAAAAAAAAAAAAAAAAAAQAAAAAQAgA=</HashCode>
+      <FileName>motor\Transient3PhaseMotorAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.Transient3PhaseMotorResults" Collapsed="true">
+    <Position X="1.75" Y="12" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAQAIAgAAAAAAAAABAAAACAASEAgAABAAAQ=</HashCode>
+      <FileName>motor\Transient3PhaseMotorAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PM_MMAnalyser" Collapsed="true">
+    <Position X="20.25" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAABAAAAAAQACgAACAAoAAAQAAAAAAQAAAAAQAAA=</HashCode>
+      <FileName>motor\PMMotor\PM_MMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMMMAnalysisOneStepResult" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEACAQAAAAAAAEAACQAAABAAAAAAAAAAAAAAAAABABA=</HashCode>
+      <FileName>motor\PMMotor\PM_MMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PM_MMAnalysisResults" Collapsed="true">
+    <Position X="4" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAQgAACAAAAAQAAABAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>motor\PMMotor\PM_MMAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMAnalyticalAnalyser" Collapsed="true">
+    <Position X="22.75" Y="10.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Private" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAEABAAAAEBAwgAAAAiAIRAAAAEAAgEAEFAAEEQggoA=</HashCode>
+      <FileName>motor\PMMotor\PMAnalyticalAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMAnalyticalResults" Collapsed="true">
+    <Position X="8.5" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEEAgAAAAAAAAIEAIgQAAAAAAAgAAAAAAAAQAAAgAU=</HashCode>
+      <FileName>motor\PMMotor\PMAnalyticalAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMTransientAnalyser" Collapsed="true">
+    <Position X="17.5" Y="13" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAQAAA=</HashCode>
+      <FileName>motor\PMMotor\PMTransientAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMTransientResults" Collapsed="true">
+    <Position X="2" Y="13" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAgACAAgAAAAAAAAAAAAAAAAAAQAAAAAAAAAQ=</HashCode>
+      <FileName>motor\PMMotor\PMTransientAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.SPMMotor">
+    <Position X="12.75" Y="4.75" Width="2" />
+    <Members>
+      <Field Name="analyticalAnalyser" Hidden="true" />
+      <Method Name="GetAnalyticalAnalyser" Hidden="true" />
+      <Method Name="GetSampleMotor" Hidden="true" />
+      <Method Name="GetStaticAnalyser" Hidden="true" />
+      <Field Name="staticAnalyser" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAACRAAAAAAAAAAAAAAABAAAAAAAAAAEAAAACAACQA=</HashCode>
+      <FileName>motor\PMMotor\SPMMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.SPMRotor" Collapsed="true">
+    <Position X="2.25" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="calc_from_geometryOfMotor.motor.PMMotor.SPMRotor.PoleType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>motor\PMMotor\SPMRotor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CwAAICCgAQIAAAACAAkAIAAAAQIAEQMEAAAIAABNYAA=</HashCode>
+      <FileName>motor\PMMotor\SPMRotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.SPMStaticAnalyser" Collapsed="true">
+    <Position X="13.25" Y="13" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>motor\PMMotor\SPMStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMStaticResults" Collapsed="true">
+    <Position X="6.25" Y="10.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEEgAAAAAAAAIEEAgQAAAAAAAgAAAAAAAAQAAAkBU=</HashCode>
+      <FileName>motor\PMMotor\PMStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.VPMMotor">
+    <Position X="15" Y="4.75" Width="2.25" />
+    <Members>
+      <Field Name="analyticalAnalyser" Hidden="true" />
+      <Method Name="GetAnalyticalAnalyser" Hidden="true" />
+      <Method Name="GetSampleMotor" Hidden="true" />
+      <Method Name="GetStaticAnalyser" Hidden="true" />
+      <Field Name="staticAnalyser" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAACRAAAAAAAAAAAAAAABAAAAAAAAAAEAAAACAACQA=</HashCode>
+      <FileName>motor\PMMotor\VPMMotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.VPMRotor" Collapsed="true">
+    <Position X="4" Y="5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Internal" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="calc_from_geometryOfMotor.motor.PMMotor.VPMRotor.PoleType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>motor\PMMotor\VPMRotor.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ywEAICCgATIAAADiYBkIYAgAAUIgFSeMDAAYwwBMYAA=</HashCode>
+      <FileName>motor\PMMotor\VPMRotor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.VPMStaticAnalyser" Collapsed="true">
+    <Position X="15.25" Y="13" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>motor\PMMotor\VPMStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.VPMStaticResults">
+    <Position X="41.75" Y="5.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEEgAAAAAAAAIEEAgQAAAAAAAgAAAAAAAAQAAAkBU=</HashCode>
+      <FileName>motor\PMMotor\VPMStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractAnalyticalResults" Collapsed="true">
+    <Position X="8.5" Y="9.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>motor\AbstractAnalyticalAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.AbstractAnalyser" Collapsed="true">
+    <Position X="19" Y="8.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="calc_from_geometryOfMotor.motor.AbstractAnalyser.MyEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>motor\AbstractAnalyser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAKAAAAAAAAACICBAACAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>motor\AbstractAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="calc_from_geometryOfMotor.motor.PMMotor.PMStaticAnalyser" Collapsed="true">
+    <Position X="14.25" Y="11.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAQAAA=</HashCode>
+      <FileName>motor\PMMotor\PMStaticAnalyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="calc_from_geometryOfMotor.motor.PointBH" Collapsed="true">
+    <Position X="18.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAA=</HashCode>
+      <FileName>motor\SupportClasses.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

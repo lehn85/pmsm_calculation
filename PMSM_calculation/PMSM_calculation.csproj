@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA4F3AD2-933A-487D-835B-E5E0AD89848F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>calc_from_geometryOfMotor</RootNamespace>
+    <AssemblyName>calc_from_geometryOfMotor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>calc_from_geometryOfMotor.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="fastJSON">
+      <HintPath>..\..\Library\fastJSON\obj\Debug\fastJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="KeraLua">
+      <HintPath>..\..\Library\NLua-079b7966245cccb42c563abeb19290459e10934e\Core\KeraLua\src\bin\Debug\net35\KeraLua.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Library\log4net-1.2.12\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.11.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLua">
+      <HintPath>..\..\Library\NLua-079b7966245cccb42c563abeb19290459e10934e\Run\Debug\net35\NLua.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\..\Library\oxyplot-develop\Source\OxyPlot\bin\Debug\NET40\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms">
+      <HintPath>..\..\Library\oxyplot-develop\Source\OxyPlot.WindowsForms\bin\Debug\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Threading">
+      <HintPath>..\packages\TaskParallelLibrary.1.0.2856.0\lib\Net35\System.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\..\Library\ZedGraph\zedgraph_dll_v515\zedgraph_dll_v5.1.5\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Brent.cs" />
+    <Compile Include="CoreLossVisualizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CoreLossVisualizer.Designer.cs">
+      <DependentUpon>CoreLossVisualizer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EfficiencyMapViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EfficiencyMapViewer.Designer.cs">
+      <DependentUpon>EfficiencyMapViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GA\GA.cs" />
+    <Compile Include="GA\Individual.cs" />
+    <Compile Include="helper\Prompt.cs" />
+    <Compile Include="LuaConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LuaConsole.Designer.cs">
+      <DependentUpon>LuaConsole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="motor\AbstractAnalyser.cs" />
+    <Compile Include="Form_MotorParams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_MotorParams.Designer.cs">
+      <DependentUpon>Form_MotorParams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LuaHelper.cs" />
+    <Compile Include="motor\AbstractMMAnalyser.cs" />
+    <Compile Include="motor\AbstractMotor.cs" />
+    <Compile Include="motor\AbstractStaticAnalyser.cs" />
+    <Compile Include="motor\AbstractTransientAnalyser.cs" />
+    <Compile Include="MATLAB.cs" />
+    <Compile Include="motor\CoreLoss.cs" />
+    <Compile Include="motor\PMMotor\PM_DQCurrentAnalyser.cs" />
+    <Compile Include="motor\PMMotor\PMStaticAnalyser.cs" />
+    <Compile Include="motor\PMMotor\PM_ACAnalyser.cs" />
+    <Compile Include="motor\PMMotor\SPMMotor.cs" />
+    <Compile Include="motor\PMMotor\SPMRotor.cs" />
+    <Compile Include="motor\PMMotor\SPMStaticAnalyser.cs" />
+    <Compile Include="motor\PMMotor\PMAnalyticalAnalyser.cs" />
+    <Compile Include="motor\PMMotor\VPMStaticAnalyser.cs" />
+    <Compile Include="motor\PMMotor\PM_MMAnalyser.cs" />
+    <Compile Include="motor\PMMotor\PMTransientAnalyser.cs" />
+    <Compile Include="motor\SupportClasses.cs" />
+    <Compile Include="motor\AbstractFEMAnalyser.cs" />
+    <Compile Include="motor\AbstractAnalyticalAnalyser.cs" />
+    <Compile Include="motor\AirgapNormal.cs" />
+    <Compile Include="motor\Stator3Phase.cs" />
+    <Compile Include="motor\PMMotor\VPMMotor.cs" />
+    <Compile Include="motor\PMMotor\VPMRotor.cs" />
+    <Compile Include="motor\Transient3PhaseMotorAnalyser.cs" />
+    <Compile Include="OptimizationResultsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptimizationResultsWindow.Designer.cs">
+      <DependentUpon>OptimizationResultsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptimizationWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptimizationWindow.Designer.cs">
+      <DependentUpon>OptimizationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParametersCollection.cs" />
+    <Compile Include="ParamSweeper.cs" />
+    <Compile Include="motor\ParkTransform.cs" />
+    <Compile Include="FEMM.cs" />
+    <Compile Include="LogWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogWindow.Designer.cs">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PMSM_EfficiencyMap_Analytical.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PMSM_EfficiencyMap_Analytical.Designer.cs">
+      <DependentUpon>PMSM_EfficiencyMap_Analytical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PreviewWindow.Designer.cs">
+      <DependentUpon>PreviewWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ResultsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ResultsWindow.Designer.cs">
+      <DependentUpon>ResultsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RichTextBoxAppender.cs" />
+    <Compile Include="GraphWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GraphWindow.Designer.cs">
+      <DependentUpon>GraphWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SweepParams_Window.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SweepParams_Window.Designer.cs">
+      <DependentUpon>SweepParams_Window.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="motor_namespace_each.cd" />
+    <None Include="motor_namespace_short.cd" />
+    <None Include="motor_namespace.cd" />
+    <None Include="lua_init.lua">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Femm">
+      <Guid>{04EF434A-1A91-495A-85AA-C625602B4AF4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="MLApp">
+      <Guid>{C36E46AB-6A81-457B-9F91-A7719A06287F}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CoreLossVisualizer.resx">
+      <DependentUpon>CoreLossVisualizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EfficiencyMapViewer.resx">
+      <DependentUpon>EfficiencyMapViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_MotorParams.resx">
+      <DependentUpon>Form_MotorParams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogWindow.resx">
+      <DependentUpon>LogWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LuaConsole.resx">
+      <DependentUpon>LuaConsole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptimizationResultsWindow.resx">
+      <DependentUpon>OptimizationResultsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptimizationWindow.resx">
+      <DependentUpon>OptimizationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PMSM_EfficiencyMap_Analytical.resx">
+      <DependentUpon>PMSM_EfficiencyMap_Analytical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PreviewWindow.resx">
+      <DependentUpon>PreviewWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GraphWindow.resx">
+      <DependentUpon>GraphWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResultsWindow.resx">
+      <DependentUpon>ResultsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SweepParams_Window.resx">
+      <DependentUpon>SweepParams_Window.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\log4net_config.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bhsample.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\advisor_MC.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mathnet.Numerics.Optimization\Mathnet.Numerics.Optimization.csproj">
+      <Project>{3142261a-d601-43d8-b144-a17ee373d577}</Project>
+      <Name>Mathnet.Numerics.Optimization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
