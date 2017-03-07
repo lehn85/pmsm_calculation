@@ -65,8 +65,9 @@ mc_losspwr_map=(1./mc_eff_map(pos_spds,pos_trqs)-1).*mc_outpwr1_map;
 %% positive torque, and
 %% ASSUME that losses at zero speed are the same as those at the lowest positive
 %% speed
-mc_losspwr_map=[fliplr(mc_losspwr_map) mc_losspwr_map(:,1) mc_losspwr_map];
-mc_losspwr_map=[mc_losspwr_map(1,:);mc_losspwr_map];
+%% mc_losspwr_map=[fliplr(mc_losspwr_map) mc_losspwr_map(:,1) mc_losspwr_map];
+%% mc_losspwr_map=[mc_losspwr_map(1,:);mc_losspwr_map];
+mc_losspwr_map=[fliplr(mc_losspwr_map) mc_losspwr_map];
 
 %% compute input power (power req'd at electrical side of motor/inverter set)
 [T,w]=meshgrid(mc_map_trq,mc_map_spd);

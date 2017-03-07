@@ -12,6 +12,8 @@ Dockerfile
 docker-compose.yml
 
 # ignore
+*.VC.db
+*.VC.opendb
 testCpp
 ModelingProject1
 Debug

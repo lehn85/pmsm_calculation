@@ -34,6 +34,9 @@ namespace calc_from_geometryOfMotor
         private double Lq_approx;
         private AbstractTransientAnalyser dummyTransientAnalyser;
 
+        private const int SPEED_POINT_COUNT = 20;
+        private const int TORQUE_POINT_COUNT = 20;
+
         private MTPA mtpa;
 
         public EfficiencyMapViewer()
@@ -1581,7 +1584,7 @@ namespace calc_from_geometryOfMotor
 
             // {MAP_SPEED_MAX_TORQUE}                
             sb = new StringBuilder();
-            sb.Append("[");
+            sb.Append("[");           
             for (int i = 0; i < mtcc.speeds.Count; i++)
             {
                 sb.Append(mtcc.speeds[i]);
@@ -2129,7 +2132,7 @@ namespace calc_from_geometryOfMotor
 
             if (last_config != config)
             {
-                effMap = buildEfficiencyMap(32, 20, Imax, Umax, max_speed);
+                effMap = buildEfficiencyMap(SPEED_POINT_COUNT, TORQUE_POINT_COUNT, Imax, Umax, max_speed);
                 last_config = config;
             }
 
