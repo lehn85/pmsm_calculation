@@ -3,12 +3,20 @@ Program helps designing permanent magnetic synchronous motor. I wrote this progr
 
 Features:
 - Analytical calculation
-- Link with FEMM for finite elements analysis
+- Use program FEMM (http://www.femm.info) for finite elements analysis
 - Optimization using genetic algorithm for searching optimum design
 - Static analyze motor (rotor stationary)
 - Dynamic analyze motor (rotor rotates, current flows defined by functions)
 - Build effeciency, losses maps
 - Export calculated model of PMSM to Matlab-Simulink as a block
-- Export to Advisor (program for analyzing dynamic characteristic of cars)
+- Export to Advisor (http://adv-vehicle-sim.sourceforge.net), which is a program for car simulations.
 
-Althought the code is a mess, it works.
+Dependencies:
+- Math.NET numerics https://numerics.mathdotnet.com/
+- Mathnet.Numerics.Optimization, which is not from Math.NET master branch, I copied from a fork, and I don't remember which. Sorry.
+- OxyPlot http://www.oxyplot.org/
+- ZedGraph https://github.com/ZedGraph/ZedGraph
+
+Program uses ActiveX component to connect to FEMM and Matlab, which can be found on their sites.
+
+Althought the code is kind of messy, it works.
