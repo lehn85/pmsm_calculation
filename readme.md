@@ -24,7 +24,7 @@ Program uses ActiveX component to connect to FEMM and Matlab, which can be found
 https://www.youtube.com/watch?v=aQfktDAtQ60
 
 ### Images
-<img src="/PMSM_calculation/captures/general.png" alt="General" style="width:50%;"/>
+<img src="/PMSM_calculation/captures/general.png" alt="General" width="50%"/>
 
 ![Optimization: Pareto front](/PMSM_calculation/captures/optimization-window-3.png)
 ![Coreloss map](/PMSM_calculation/captures/coreloss-map.png)
