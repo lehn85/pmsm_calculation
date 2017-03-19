@@ -25,7 +25,6 @@ https://www.youtube.com/watch?v=aQfktDAtQ60
 
 ### Images
 <img src="/PMSM_calculation/captures/general.png" alt="General" width="50%"/>
-
-![Optimization: Pareto front](/PMSM_calculation/captures/optimization-window-3.png)
-![Coreloss map](/PMSM_calculation/captures/coreloss-map.png)
-![Efficiency map](/PMSM_calculation/captures/eff-map.png)
+<img src="/PMSM_calculation/captures/optimization-window-3.png" alt="Optimization: Pareto front" width="50%"/>
+<img src="/PMSM_calculation/captures/coreloss-map.png" alt="Coreloss map" width="50%"/>
+<img src="/PMSM_calculation/captures/eff-map.png" alt="Efficiency map" width="50%"/>
