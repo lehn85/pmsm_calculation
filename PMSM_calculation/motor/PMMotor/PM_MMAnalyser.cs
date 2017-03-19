@@ -201,7 +201,7 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             return mma;
         }
 
-        private String DefaultOriginalSimulinkModelFile = @"pmsm_model.mdl";
+        private String DefaultOriginalSimulinkModelFile = @"data\\pmsm_model.mdl";
 
         public override void MakeMatlabSimulinkModelFile(string outputfile, string original = "")
         {

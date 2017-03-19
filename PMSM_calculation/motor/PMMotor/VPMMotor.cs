@@ -241,7 +241,9 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             dict.Add("Volume Slot (Total) m3", Stator.VolumeSlot);
             dict.Add("Volume Copper (Total) m3", Stator.VolumeCopper);
             dict.Add("Volume Magnet (Total) m3", Rotor.VolumeMagnet);
-            dict.Add("Slot fill factor (%)", Stator.VolumeCopper / Stator.VolumeSlot * 100);
+            dict.Add("Slot fill factor (%)", Stator.SectionAreaCopper / Stator.SectionAreaSlot * 100);
+            dict.Add("Section Area of Copper (Total) m2", Stator.SectionAreaCopper);
+            dict.Add("Section Area of Slot (Total) m2", Stator.SectionAreaSlot);
 
             //double m_rotor = Volume_Rotor * Rotor.Steel_ro;
             //double m_stator = Volume_Stator * Stator.Steel_ro;

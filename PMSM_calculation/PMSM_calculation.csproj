@@ -204,10 +204,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="data\pmsm_model.mdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="motor_namespace_each.cd" />
     <None Include="motor_namespace_short.cd" />
     <None Include="motor_namespace.cd" />
-    <None Include="lua_init.lua">
+    <None Include="data\lua_init.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

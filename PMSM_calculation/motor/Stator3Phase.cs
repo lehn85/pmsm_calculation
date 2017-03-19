@@ -202,6 +202,14 @@ namespace calc_from_geometryOfMotor.motor
             }
         }
 
+        public double SectionAreaSlot
+        {
+            get
+            {
+                return Q * (BS1 + BS2) * (HS1 + HS2) / 2 * 1e-6;
+            }
+        }
+
         public double VolumeSteel
         {
             get
@@ -222,7 +230,15 @@ namespace calc_from_geometryOfMotor.motor
         {
             get
             {
-                return Q * NStrands * (WireDiameter / 2) * (WireDiameter / 2) * Math.PI * Motor.GeneralParams.MotorLength * 1e-9;
+                return Q * NStrands * (WireDiameter / 2) * (WireDiameter / 2) * Math.PI * wirelength_oneturn / 2 * 1e-9;
+            }
+        }
+
+        public double SectionAreaCopper
+        {
+            get
+            {
+                return Q * NStrands * (WireDiameter / 2) * (WireDiameter / 2) * Math.PI * 1e-6;
             }
         }
 

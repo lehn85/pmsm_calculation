@@ -18,7 +18,7 @@ namespace calc_from_geometryOfMotor
                 return lua_state;
 
             lua_state = new Lua();
-            using(StreamReader sr = new StreamReader("lua_init.lua")) {
+            using(StreamReader sr = new StreamReader("data\\lua_init.lua")) {
                 String script = sr.ReadToEnd();
                 lua_state.DoString(script);
             }

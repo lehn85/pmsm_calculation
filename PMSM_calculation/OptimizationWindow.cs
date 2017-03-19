@@ -520,6 +520,8 @@ return f
 
         private List<FEMM> FEMMToUse;
 
+        private int individualCount = 0;
+
         /// <summary>
         /// Init GA, and start new thread to run optimization
         /// </summary>
@@ -600,9 +602,11 @@ return f
             sw = new Stopwatch();
             sw.Start();
 
-            // new FEMM
+            individualCount = 0;
+
+            // new FEMM windows
             if (lua["useFEM"] != null)
-            {                
+            {
                 FEMMToUse = new List<FEMM>();
                 // 1 windows for now
                 for (int i = 0; i < 1; i++)
@@ -706,7 +710,21 @@ return f
                 mma.CustomOutputDir = outdir;
                 mma.FEMMToUse = FEMMToUse;
                 mma.RunAnalysis();
-                fem_results = mma.Results;                
+                fem_results = mma.Results;
+
+                // to take pictures of progress 
+                //FEMMToUse[0].open(femFile);
+
+                //Invoke((Action)delegate ()
+                //{
+                //    individualCount++;
+                //    Bitmap bmp = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+                //    Graphics gr = Graphics.FromImage(bmp);
+                //    gr.CopyFromScreen(0, 0, 0, 0, bmp.Size);
+                //    bmp.Save("D:\\captures\\" + string.Format("{0:D8}", individualCount) + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                //});
+
+                //FEMMToUse[0].mi_close();
             }
 
             var f = lua_fitnessFunction(a.Results, fem_results, currentConfig.luascript_fitness_function);
