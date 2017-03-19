@@ -1,4 +1,11 @@
-﻿using calc_from_geometryOfMotor.motor;
+﻿/****
+ * PMSM calculation - automate PMSM design process
+ * Created 2016 by Ngo Phuong Le
+ * https://github.com/lehn85/pmsm_calculation
+ * All files are provided under the MIT license.
+ ****/
+
+using calc_from_geometryOfMotor.motor;
 using fastJSON;
 using log4net;
 using System;

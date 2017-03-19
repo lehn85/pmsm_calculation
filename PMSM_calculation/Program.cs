@@ -1,4 +1,11 @@
-﻿using System;
+﻿/****
+ * PMSM calculation - automate PMSM design process
+ * Created 2016 by Ngo Phuong Le
+ * https://github.com/lehn85/pmsm_calculation
+ * All files are provided under the MIT license.
+ ****/
+
+using System;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
