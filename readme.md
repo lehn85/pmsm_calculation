@@ -20,8 +20,12 @@ Althought the code is kind of messy, it works.
 
 Program uses ActiveX component to connect to FEMM and Matlab, which can be found on their sites.
 
+### Videos
+https://www.youtube.com/watch?v=aQfktDAtQ60
+
 ### Images
-![General](/PMSM_calculation/captures/general.png)
+<img src="/PMSM_calculation/captures/general.png" alt="General" style="width:50%;"/>
+
 ![Optimization: Pareto front](/PMSM_calculation/captures/optimization-window-3.png)
 ![Coreloss map](/PMSM_calculation/captures/coreloss-map.png)
 ![Efficiency map](/PMSM_calculation/captures/eff-map.png)
