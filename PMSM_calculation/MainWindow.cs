@@ -103,7 +103,8 @@ namespace calc_from_geometryOfMotor
 
         private void refreshUI()
         {
-            this.Text = String.Format("{0}", projectManager.CurrentProjectFile);
+            string md5str = projectManager.Motor != null ? projectManager.Motor.GetMD5String() : "NULL";
+            this.Text = String.Format("{0} ({1})", projectManager.CurrentProjectFile, md5str);
         }
 
         #region File menu

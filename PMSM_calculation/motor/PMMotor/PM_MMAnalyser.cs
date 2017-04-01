@@ -208,7 +208,7 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             return mma;
         }
 
-        private String DefaultOriginalSimulinkModelFile = @"data\\pmsm_model.mdl";
+        private String DefaultOriginalSimulinkModelFile = AppDomain.CurrentDomain.BaseDirectory + @"\\data\\pmsm_model.mdl";
 
         public override void MakeMatlabSimulinkModelFile(string outputfile, string original = "")
         {
@@ -261,6 +261,7 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             ml.ChangeWorkingFolder(outputpath);
             ml.save_system(modelname, outputname);//save as new name
             ml.close_system(outputname);//close it
+            ml.Quit();
         }
 
     }//end of class MMAnalysis
