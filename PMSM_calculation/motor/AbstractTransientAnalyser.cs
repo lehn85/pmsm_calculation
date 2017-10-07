@@ -60,7 +60,7 @@ namespace calc_from_geometryOfMotor.motor
         protected sealed override void analyze()
         {
             // for multi-thread config
-            int threadCount = 4;
+            int threadCount = 1;
             ManualResetEvent[] MREs = new ManualResetEvent[threadCount];
             Queue<int> steps = new Queue<int>();
             for (int i = 0; i < StepCount + 1; i++)
@@ -73,7 +73,7 @@ namespace calc_from_geometryOfMotor.motor
                 ManualResetEvent mre = MREs[i];
                 new Thread(delegate ()
                 {
-                    FEMM femm = new FEMM();
+                    FEMM femm = new FEMM();                    
                     while (steps.Count > 0)
                     {
                         int step = steps.Dequeue();
@@ -142,6 +142,13 @@ namespace calc_from_geometryOfMotor.motor
 
                 //log.Info(String.Format("Time {0:F5}: {1}", t, torque));
 
+                // save as bitmap
+                femm.mo_clearblock();
+                femm.mo_zoom(0, -65, 100, 65);
+                femm.mo_showdensityplot(true, false, 0, 2.1, FEMM.DensityPlotType.bmag);                
+                femm.mo_savebitmap(Path.GetDirectoryName(stepfileFEM) + "\\" + Path.GetFileNameWithoutExtension(stepfileFEM) + ".bmp");
+
+                // close
                 femm.mo_close();
 
                 // after analyzing
@@ -197,7 +204,7 @@ namespace calc_from_geometryOfMotor.motor
                         {
                             total_args.CircuitProperties[key].fluxlinkage = 0;
                         }
-                    }
+                    }                    
 
                     femm.mo_close();
 

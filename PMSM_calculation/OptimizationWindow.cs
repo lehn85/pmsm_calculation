@@ -958,8 +958,6 @@ return f
                 progressBar1.Value = 0;
                 label_progress.Text = (ga.Cancelled ? "Cancelled after " : "Finished in ") + (sw.ElapsedMilliseconds / 1000) + " secs.";
 
-
-
                 //if (datalog.Count > 0)
                 //{
                 //    GraphWindow tc = new GraphWindow();

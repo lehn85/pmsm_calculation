@@ -41,8 +41,8 @@ namespace calc_from_geometryOfMotor
         private double Lq_approx;
         private AbstractTransientAnalyser dummyTransientAnalyser;
 
-        private const int SPEED_POINT_COUNT = 20;
-        private const int TORQUE_POINT_COUNT = 20;
+        private const int SPEED_POINT_COUNT = 10;
+        private const int TORQUE_POINT_COUNT = 10;
 
         private MTPA mtpa;
 
@@ -796,7 +796,9 @@ namespace calc_from_geometryOfMotor
             {
                 double II = Imax * i / stepcount;
 
+                // tool
                 var minimizer = new GoldenSectionMinimizer(1e-5, 1000, 0);
+                // object function
                 var objfnc = new SimpleObjectiveFunction1D(b =>
                 {
                     double id = II * Math.Cos(b);
@@ -806,6 +808,8 @@ namespace calc_from_geometryOfMotor
                     return -data.torque;
                 });
 
+                // find beta, starting from pi/2 to pi
+                // so that torque is max
                 MinimizationOutput1D min = null;
                 double beta_rad = Math.PI / 2;
                 double max_t = 0;
@@ -1065,7 +1069,6 @@ namespace calc_from_geometryOfMotor
             };
 
             // Look for beta to get max torque
-
             double max_t = mtpa.GetMaxTorqueWithCurrentMagnitude(Imax);
             Fdq idq = mtpa.GetCurrentForTorque(max_t);
 

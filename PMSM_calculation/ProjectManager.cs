@@ -373,10 +373,10 @@ namespace calc_from_geometryOfMotor
             sw.Start();
 
             TransAnalysisGroup[name].OnFinishedAnalysis -= OnFinishAnalysis_internal;
-            TransAnalysisGroup[name].OnFinishedAnalysis += OnFinishAnalysis_internal;
+            TransAnalysisGroup[name].OnFinishedAnalysis += OnFinishAnalysis_internal;        
 
             TransAnalysisGroup[name].StartAnalysis();//start async
-        }
+        }        
 
         private void OnFinishAnalysis_internal(object sender, AbstractResults results)
         {

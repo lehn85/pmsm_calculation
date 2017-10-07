@@ -48,7 +48,7 @@ namespace btl.generic
             m_crossoverRate = 0.80;
             m_populationSize = 100;
             m_generationSize = 2000;
-            m_strFitness = "";
+            m_fitnessFile = "";
         }
 
         public GA(double crossoverRate, double mutationRate, int populationSize, int generationSize, int genomeSize, int fitnessSize)
@@ -60,7 +60,7 @@ namespace btl.generic
             m_generationSize = generationSize;
             m_genomeSize = genomeSize;
             m_fitnessSize = fitnessSize;
-            m_strFitness = "";
+            m_fitnessFile = "";
         }
 
         public GA(int genomeSize, int fitnessSize)
@@ -106,11 +106,14 @@ namespace btl.generic
                 StepFinish.Invoke(this, 0);
 
             StreamWriter outputFitness = null;
-            if (m_strFitness != "")
+            if (m_fitnessFile != "")
             {
-                outputFitness = new StreamWriter(m_strFitness);
+                outputFitness = new StreamWriter(m_fitnessFile);
 
-                writeData(outputFitness, m_thisGeneration);
+                outputFitness.WriteLine("{0}\t{1}", GenomeSize, FitnessSize);//sizes
+
+                // first gen
+                writeData(outputFitness, m_thisGeneration, true);
             }
 
             for (int i = 0; i < m_generationSize; i++)
@@ -127,6 +130,7 @@ namespace btl.generic
                 // debug
                 if (outputFitness != null)
                 {
+                    // write this generation data
                     writeData(outputFitness, m_thisGeneration);
                 }
 
@@ -138,33 +142,44 @@ namespace btl.generic
             if (outputFitness != null)
                 outputFitness.Close();
 
-            //write final non - dominated set
-            if (m_strFitness != "")
+            // write final nondominated set
+            if (m_fitnessFile != "")
             {
-                string fn = Path.GetDirectoryName(m_strFitness) + "\\" + Path.GetFileNameWithoutExtension(m_strFitness) + "_final" + Path.GetExtension(m_strFitness);
+                string fn = Path.GetDirectoryName(m_fitnessFile) + "\\" + Path.GetFileNameWithoutExtension(m_fitnessFile) + "_final" + Path.GetExtension(m_fitnessFile);
                 using (StreamWriter sw = new StreamWriter(fn))
                 {
                     m_finalNonDominatedSet = buildNonDominatedSetFromGeneration(allGenerations);
+                    sw.WriteLine("{0}\t{1}", GenomeSize, FitnessSize);//sizes                 
                     writeData(sw, m_finalNonDominatedSet);
                 }
             }
 
+
+
             Running = false;
         }
 
-        private void writeData(StreamWriter sw, List<Individual> data)
+        private void writeData(StreamWriter sw, List<Individual> data, bool includeGens = true)
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < data.Count; i++)
             {
                 double[] f = data[i].Fitness;
+
+                // check if this individual is a failure
                 if (f == null)
                     continue;
+
+                double[] g = data[i].Genes;
+                for (int j = 0; j < g.Length; j++)
+                {
+                    sb.AppendFormat("{0}\t", g[j]);
+                }
 
                 for (int j = 0; j < f.Length; j++)
                 {
                     sb.AppendFormat("{0}\t", f[j]);
-                }
+                }                
                 sb.Append("\n");
             }
 
@@ -332,7 +347,7 @@ namespace btl.generic
         private int m_generationSize;
         private int m_genomeSize;
         private int m_fitnessSize;
-        private string m_strFitness;
+        private string m_fitnessFile;
         private bool m_elitism;
 
         private List<Individual> m_thisGeneration;
@@ -434,11 +449,11 @@ namespace btl.generic
         {
             get
             {
-                return m_strFitness;
+                return m_fitnessFile;
             }
             set
             {
-                m_strFitness = value;
+                m_fitnessFile = value;
             }
         }
 

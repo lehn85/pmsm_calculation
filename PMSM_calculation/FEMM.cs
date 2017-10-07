@@ -1318,7 +1318,7 @@ namespace calc_from_geometryOfMotor
          * */
         public void mo_showdensityplot(bool showlegend, bool grayscale, double lowerlimit, double upperlimit, DensityPlotType type)
         {
-            callFemm("mo_showdensityplot({0},{1},{2},\"{3}\")", showlegend ? 1 : 0, grayscale ? 1 : 0, upperlimit, lowerlimit, type);
+            callFemm("mo_showdensityplot({0},{1},{2},{3},\"{4}\")", showlegend ? 1 : 0, grayscale ? 1 : 0, upperlimit, lowerlimit, type);
         }
 
         public enum DensityPlotType
