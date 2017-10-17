@@ -53,6 +53,7 @@ namespace calc_from_geometryOfMotor
 
         private void EfficiencyMapViewer_Load(object sender, EventArgs e)
         {
+            // add maptype enum to combo box
             comboBox_maptype.Items.AddRange(typeof(MapType).GetEnumNames());
         }
 
@@ -115,6 +116,9 @@ namespace calc_from_geometryOfMotor
             public double ud;
             public double uq;
 
+            public double psid;
+            public double psiq;
+
             public double Ld;
             public double Lq;
 
@@ -135,6 +139,7 @@ namespace calc_from_geometryOfMotor
                     return Math.Sqrt(ud * ud + uq * uq);
                 }
             }
+
             public double current
             {
                 get
@@ -142,6 +147,15 @@ namespace calc_from_geometryOfMotor
                     return Math.Sqrt(id * id + iq * iq);
                 }
             }
+
+            public double fluxlinkage
+            {
+                get
+                {
+                    return Math.Sqrt(psid * psid + psiq * psiq);
+                }
+            }
+
             public double beta
             {
                 get
@@ -330,6 +344,8 @@ namespace calc_from_geometryOfMotor
                 result = result,
                 ed = result.InducedVoltage_D().Sum() / result.Count,
                 eq = result.InducedVoltage_Q().Sum() / result.Count,
+                psid = result.FluxLinkage_D().Sum() / result.Count,
+                psiq = result.FluxLinkage_Q().Sum() / result.Count,
                 Ld = result.Inductance_D().Sum() / result.Count,
                 Lq = result.Inductance_Q().Sum() / result.Count,
             };
@@ -1055,6 +1071,23 @@ namespace calc_from_geometryOfMotor
             public readonly List<double> phi = new List<double>();
             public readonly List<double> effs = new List<double>();
             public readonly List<double> coreloss = new List<double>();
+
+            private LinearSpline maxTorque_spline;
+
+            public double getMaxTorqueForSpeed(double s)
+            {
+                checkAndCreateSpline();
+
+                return maxTorque_spline.Interpolate(s);
+            }
+
+            private void checkAndCreateSpline()
+            {
+                if (maxTorque_spline == null)
+                {
+                    maxTorque_spline = LinearSpline.Interpolate(speeds, maxtorques);
+                }
+            }
         }
 
         private MaxtorqueCapabilityCurve buildMaxtorqueCapabilityCurve(int count = 50, double Imax = 55, double Umax = 140, double max_speed = 6000)
@@ -1264,8 +1297,13 @@ namespace calc_from_geometryOfMotor
             beta,
             Id,
             Iq,
+            Ud,
+            Uq,
+            psid,
+            psiq,
             Ld,
             Lq,
+            cosphi,
         }
 
         private class EfficiencyMap
@@ -1311,6 +1349,14 @@ namespace calc_from_geometryOfMotor
             public double[,] id;
             public double[,] iq;
 
+            // ud, uq
+            public double[,] ud;
+            public double[,] uq;
+
+            // psid, psiq
+            public double[,] psid;
+            public double[,] psiq;
+
             // other
             /// <summary>
             /// V
@@ -1332,6 +1378,11 @@ namespace calc_from_geometryOfMotor
             /// mH
             /// </summary>
             public double[,] Lq;
+
+            /// <summary>
+            /// cosPhi
+            /// </summary>
+            public double[,] cosphi;
         }
 
         private EfficiencyMap buildEfficiencyMap(int speed_count, int torque_count, double Imax, double Umax, double max_speed)
@@ -1372,11 +1423,18 @@ namespace calc_from_geometryOfMotor
                 id = new double[speed_count, torque_count],
                 iq = new double[speed_count, torque_count],
 
+                ud = new double[speed_count, torque_count],
+                uq = new double[speed_count, torque_count],
+
+                psid = new double[speed_count, torque_count],
+                psiq = new double[speed_count, torque_count],
+
                 voltage = new double[speed_count, torque_count],
                 current = new double[speed_count, torque_count],
                 beta = new double[speed_count, torque_count],
                 Ld = new double[speed_count, torque_count],
                 Lq = new double[speed_count, torque_count],
+                cosphi = new double[speed_count, torque_count],
             };
             em.power.Fill2D(double.NaN);
             em.efficiency.Fill2D(double.NaN);
@@ -1394,11 +1452,18 @@ namespace calc_from_geometryOfMotor
             em.id.Fill2D(double.NaN);
             em.iq.Fill2D(double.NaN);
 
+            em.ud.Fill2D(double.NaN);
+            em.uq.Fill2D(double.NaN);
+
+            em.psid.Fill2D(double.NaN);
+            em.psiq.Fill2D(double.NaN);
+
             em.voltage.Fill2D(double.NaN);
             em.current.Fill2D(double.NaN);
             em.beta.Fill2D(double.NaN);
             em.Ld.Fill2D(double.NaN);
             em.Lq.Fill2D(double.NaN);
+            em.cosphi.Fill2D(double.NaN);
 
             var mtpa = buildTableMaxtorquePerAmple();
             double max_t = mtpa.GetMaxTorqueWithCurrentMagnitude(Imax);
@@ -1467,14 +1532,25 @@ namespace calc_from_geometryOfMotor
                         em.torque[i, j] = data.torque;
                         em.cogging[i, j] = data.cogging;
 
+                        // current
                         em.id[i, j] = data.id;
                         em.iq[i, j] = data.iq;
+
+                        // voltage
+                        em.ud[i, j] = data.ud;
+                        em.uq[i, j] = data.uq;
+
+                        // psi
+                        em.psid[i, j] = data.psid;
+                        em.psiq[i, j] = data.psiq;
 
                         em.voltage[i, j] = data.voltage;
                         em.current[i, j] = data.current;
                         em.beta[i, j] = data.beta;
                         em.Ld[i, j] = double.IsNaN(data.Ld) || data.Ld < 0 ? -0.0001 : data.Ld * 1000;//to mH
                         em.Lq[i, j] = double.IsNaN(data.Ld) || data.Ld < 0 ? -0.0001 : data.Lq * 1000;//to mH
+
+                        em.cosphi[i, j] = (data.id * data.ud + data.iq * data.uq) / (data.current * data.voltage);
                     }
                 }
             }
@@ -1594,7 +1670,7 @@ namespace calc_from_geometryOfMotor
 
             // {MAP_SPEED_MAX_TORQUE}                
             sb = new StringBuilder();
-            sb.Append("[");           
+            sb.Append("[");
             for (int i = 0; i < mtcc.speeds.Count; i++)
             {
                 sb.Append(mtcc.speeds[i]);
@@ -1861,10 +1937,10 @@ namespace calc_from_geometryOfMotor
                 {
                     for (int i = 0; i < effmap.speed_points.Length; i++)
                     {
-                        if (double.IsNaN(effmap.efficiency[i, j]))
+                        if (double.IsNaN(effmap.cosphi[i, j]))
                             sw.Write("nan    ");
                         else
-                            sw.Write((0) + "    ");//unknown
+                            sw.Write((effmap.cosphi[i, j]) + "    ");
                     }
                     sw.WriteLine();
                 }
@@ -1876,10 +1952,10 @@ namespace calc_from_geometryOfMotor
                 {
                     for (int i = 0; i < effmap.speed_points.Length; i++)
                     {
-                        if (double.IsNaN(effmap.efficiency[i, j]))
+                        if (double.IsNaN(effmap.psid[i, j]))
                             sw.Write("nan    ");
                         else
-                            sw.Write((0) + "    ");//unknown
+                            sw.Write((effmap.psid[i, j]) + "    ");
                     }
                     sw.WriteLine();
                 }
@@ -1891,10 +1967,10 @@ namespace calc_from_geometryOfMotor
                 {
                     for (int i = 0; i < effmap.speed_points.Length; i++)
                     {
-                        if (double.IsNaN(effmap.efficiency[i, j]))
+                        if (double.IsNaN(effmap.psiq[i, j]))
                             sw.Write("nan    ");
                         else
-                            sw.Write((0) + "    ");//unknown
+                            sw.Write((effmap.psiq[i, j]) + "    ");//unknown
                     }
                     sw.WriteLine();
                 }
@@ -1906,10 +1982,10 @@ namespace calc_from_geometryOfMotor
                 {
                     for (int i = 0; i < effmap.speed_points.Length; i++)
                     {
-                        if (double.IsNaN(effmap.efficiency[i, j]))
+                        if (double.IsNaN(effmap.ud[i, j]))
                             sw.Write("nan    ");
                         else
-                            sw.Write((0) + "    ");//unknown
+                            sw.Write((effmap.ud[i, j]) + "    ");
                     }
                     sw.WriteLine();
                 }
@@ -1921,10 +1997,10 @@ namespace calc_from_geometryOfMotor
                 {
                     for (int i = 0; i < effmap.speed_points.Length; i++)
                     {
-                        if (double.IsNaN(effmap.efficiency[i, j]))
+                        if (double.IsNaN(effmap.uq[i, j]))
                             sw.Write("nan    ");
                         else
-                            sw.Write((0) + "    ");//unknown
+                            sw.Write((effmap.uq[i, j]) + "    ");//unknown
                     }
                     sw.WriteLine();
                 }
@@ -2163,7 +2239,7 @@ namespace calc_from_geometryOfMotor
 
             Enum.TryParse<MapType>(comboBox_maptype.Text, true, out maptype);
 
-            var data = effMap.power;
+            double[,] data = effMap.power;
             string title = "Power (W)";
 
             switch (maptype)
@@ -2216,6 +2292,26 @@ namespace calc_from_geometryOfMotor
                     data = effMap.iq;
                     title = "Iq (A)";
                     break;
+                case MapType.Ud:
+                    data = effMap.ud;
+                    title = "Ud (V)";
+                    break;
+                case MapType.Uq:
+                    data = effMap.uq;
+                    title = "Uq (V)";
+                    break;
+                case MapType.cosphi:
+                    data = effMap.cosphi;
+                    title = "cos phi";
+                    break;
+                case MapType.psid:
+                    data = effMap.psid;
+                    title = "Psi d (Wb)";
+                    break;
+                case MapType.psiq:
+                    data = effMap.uq;
+                    title = "Psi q (Wb)";
+                    break;
                 case MapType.voltage:
                     data = effMap.voltage;
                     title = "Voltage (V)";
@@ -2253,14 +2349,19 @@ namespace calc_from_geometryOfMotor
                 Title = title,
             };
 
+            double minval = 0;
+            double maxval = 100;
+            double.TryParse(tb_minVal.Text, out minval);
+            double.TryParse(tb_maxVal.Text, out maxval);
+
             model.Axes.Add(new LinearColorAxis
             {
                 Position = AxisPosition.Right,
                 Palette = OxyPalettes.Jet(500),
                 HighColor = OxyColors.Gray,
                 LowColor = OxyColors.White,
-                Minimum = 60,
-                Maximum = 100,
+                Minimum = minval,
+                Maximum = maxval,
                 Title = title
             });
 
@@ -2288,13 +2389,78 @@ namespace calc_from_geometryOfMotor
 
             var mtpa = buildTableMaxtorquePerAmple();
 
+            // interpolate data
+            double maxSpeed = effMap.MaxSpeed;
+            double maxTorque = mtpa.GetMaxTorqueWithCurrentMagnitude(effMap.Imax);
+            int interpScale = 20;
+            int newSpeedCount = effMap.speed_points.Length * interpScale;
+            int newTorqueCount = effMap.torque_points.Length * interpScale;
+            double[,] newData = new double[data.GetLength(0) * interpScale, data.GetLength(1) * interpScale];
+            double[] colCoords = new double[newSpeedCount];
+            double[] rowCoords = new double[newTorqueCount];
+
+            for (int i = 0; i < newSpeedCount; i++)
+                colCoords[i] = (i + 1) * maxSpeed / newSpeedCount;
+            for (int j = 0; j < newTorqueCount; j++)
+                rowCoords[j] = (j + 1) * maxTorque / newTorqueCount;
+
+            for (int i = 1; i <= newSpeedCount; i++)
+            {
+                double s = colCoords[i - 1];
+                // get ii (left corner)
+                int ii = i / interpScale - 1;
+                if (ii < 0)
+                    ii = 0;
+                if (ii == effMap.speed_points.Length - 1)
+                    ii--;
+
+                for (int j = 1; j <= newTorqueCount; j++)
+                {
+                    double t = rowCoords[j - 1];
+
+                    // get jj (bottom corner)
+                    int jj = j / interpScale - 1;
+                    if (jj < 0)
+                        jj = 0;
+                    if (jj == effMap.torque_points.Length - 1)
+                        jj--;
+
+                    if (t <= effMap.mtcc.getMaxTorqueForSpeed(s))
+                    {
+                        // make sure all 4 points not NaN
+                        //if (double.IsNaN(data[ii + 1, jj + 1]))
+                        //{
+                        //    ii--; jj--;
+                        //}
+
+                        // interpolate from 4 points
+                        int dx = i - ii * interpScale - interpScale;
+                        int dy = j - jj * interpScale - interpScale;
+                        int s11 = dx * dy;
+                        int s12 = dx * (interpScale - dy);
+                        int s21 = (interpScale - dx) * dy;
+                        int s22 = (interpScale - dx) * (interpScale - dy);
+
+                        newData[i - 1, j - 1] = (s11 * data[ii + 1, jj + 1]
+                            + s21 * data[ii, jj + 1]
+                            + s12 * data[ii + 1, jj]
+                            + s22 * data[ii, jj])
+                            / (s11 + s12 + s21 + s22);
+                    }
+                    else
+                    {
+                        newData[i - 1, j - 1] = double.NaN;
+                    }
+                }
+            }
+
             var hms = new HeatMapSeries
             {
                 X0 = 0,
                 X1 = effMap.MaxSpeed,
                 Y0 = 0,
                 Y1 = mtpa.GetMaxTorqueWithCurrentMagnitude(effMap.Imax),
-                Data = data,
+                Data = newData,
                 Interpolate = false,
             };
             model.Series.Add(hms);
@@ -2306,11 +2472,14 @@ namespace calc_from_geometryOfMotor
                 //FontSize = 12,
                 //ContourLevelStep = double.NaN,                
                 //LabelBackground = OxyColors.White,
-                ColumnCoordinates = effMap.speed_points,
-                RowCoordinates = effMap.torque_points,
-                Data = data,
-
+                //ColumnCoordinates = effMap.speed_points,
+                //RowCoordinates = effMap.torque_points,
+                //Data = data,
+                ColumnCoordinates = colCoords,
+                RowCoordinates = rowCoords,
+                Data = newData,
             };
+
             if (cs.Data == effMap.efficiency)
             {
                 cs.ContourLevels = new double[] { 60, 70, 80, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 };
