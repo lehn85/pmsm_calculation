@@ -2624,7 +2624,7 @@ namespace calc_from_geometryOfMotor
 
         private void bt_open_effviewer_Click(object sender, EventArgs e)
         {
-            Process.Start(@"E:\zAspirant\Efficiency Map Displayer\Efficiency Map Displayer.exe");
+            Process.Start(Properties.Settings.Default.EfficiencyMapDisplayer);
         }
     }
 }

@@ -264,7 +264,7 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             dict.Add("kPMz", kPMz);
             dict.Add("kPMy", kPMy);
             dict.Add("wd", wd);
-            dict.Add("psiM (max)", psiM);
+            dict.Add("psiM", psiM);
             //dict.Add("psiM2", psiM2);
             dict.Add("Ld", Ld);
             dict.Add("Lq", Lq);

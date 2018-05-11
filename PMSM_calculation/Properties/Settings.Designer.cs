@@ -34,5 +34,17 @@ namespace calc_from_geometryOfMotor.Properties {
                 this["LastProjectFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(".\\Efficiency Map Displayer\\Efficiency Map Displayer.exe")]
+        public string EfficiencyMapDisplayer {
+            get {
+                return ((string)(this["EfficiencyMapDisplayer"]));
+            }
+            set {
+                this["EfficiencyMapDisplayer"] = value;
+            }
+        }
     }
 }

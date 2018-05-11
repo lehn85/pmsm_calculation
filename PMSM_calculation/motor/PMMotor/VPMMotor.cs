@@ -83,7 +83,7 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             // slot width
             double wslot = 2 * Stator.Rinstator * Math.PI / Stator.Q - wz;
 
-            Console.WriteLine("alphaM = " + (Rotor.alphaM * 180 / Math.PI * 2));
+            //Console.WriteLine("alphaM = " + (Rotor.alphaM * 180 / Math.PI * 2));
 
             analyticalAnalyser.Sz = Nz * wz * GeneralParams.MotorLength * 1e-6;
             analyticalAnalyser.Sy = 2 * wy * GeneralParams.MotorLength * 1e-6;
