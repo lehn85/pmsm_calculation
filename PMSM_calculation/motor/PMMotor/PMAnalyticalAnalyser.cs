@@ -136,53 +136,30 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             Results.wd = wd;
             Results.gammaM = gammaM;
 
+            // number of slot per pole per phase
             int q = Q / 3 / p / 2;
-            double kp = Math.Sin(Math.PI / (2 * 3)) / (q * Math.Sin(Math.PI / (2 * 3 * q)));
-
-            //Results.psiM = phiD * Nstrand * p * q * kp /*4 / Math.PI * Math.Sin(gammaM / 2 * Math.PI / 180)*/;            
-
-            // Ld, Lq
-
-            //double In = 3;//Ampe whatever            
-            //double Fmm = q * kp * Nstrand * In;
-            //double phidelta = (Fmm) / (1 / PMd + Fz / phiD + Fy / phiD) / 2;//2time,PMd=PM+Pdelta
-            //double psi = phidelta * q * kp * Nstrand;
-            //double LL = p * psi / In;
-
-            //Results.LL = LL;
-            //Results.Ld = 1.5 * LL;//M=-1/2L            
-
-            //phidelta = (Fmm) / (1 / PMq + Fz / phiD + Fy / phiD) / 2;//
-            //psi = phidelta * q * kp * Nstrand;
-            //LL = p * psi / In;
-            //Results.Lq = 1.5 * LL;
+            // k winding
+            double kp = Math.Sin(Math.PI / (2 * 3)) / (q * Math.Sin(Math.PI / (2 * 3 * q)));            
 
             // Resistant
             Stator3Phase stator = Motor.Stator as Stator3Phase;
             Results.R = stator.resistancePhase;
 
+            // inductances
             double delta2 = delta * 1.1;
             double ns = 4 / Math.PI * kp * stator.NStrands * q;
             double dmin = delta2;
             double alphaM = Motor.Rotor is VPMRotor ? (Motor.Rotor as VPMRotor).alphaM : 180;
-            //double dmax = delta2 + lm / Math.Sin(alphaM);            
-            double dmax = delta2 + Constants.mu_0 * L * wd * 1e-3 * (1 / (PM + PFe + Pb) + Fy / phiD + Fz / phiD);//* wd / wm2 * ((VPMRotor)Motor.Rotor).mu_M;
-            //double dmax = L * wd * 1e-3 * Constants.mu_0 / PMd;
-            //double dmin2 = 1 / Math.PI * ((180 - gammaM) * dmin + gammaM * dmax) * Math.PI / 180 - 2 / Math.PI * Math.Sin(gammaM * Math.PI / 180) * (dmax - dmin);
-            //double dmax2 = 1 / Math.PI * ((180 - gammaM) * dmin + gammaM * dmax) * Math.PI / 180 + 2 / Math.PI * Math.Sin(gammaM * Math.PI / 180) * (dmax - dmin);
-            //double a1 = 0.5 * (1 / dmin2 + 1 / dmax2) * 1e3;
-            //double a2 = 0.5 * (1 / dmin2 - 1 / dmax2) * 1e3;
-            //double a1 = 0.5 * (dmin + dmax) / (dmin * dmax) * 1e3;
-            //double a2 = 0.5 * (dmax - dmin) / (dmin * dmax) * 1e3;
-
-            // test override           
+            double dmax = delta2;
+            if (Motor.Rotor is VPMRotor)
+                dmax = delta2 + Constants.mu_0 * L * wd * 1e-3 * (1 / (PM + PFe + Pb) + Fy / phiD + Fz / phiD);//* wd / wm2 * ((VPMRotor)Motor.Rotor).mu_M;                       
 
             double gm = gammaM * Math.PI / 180;
             double a1 = 1 / Math.PI * (gm / dmax + (Math.PI - gm) / dmin) * 1e3;
             double a2 = -2 / Math.PI * Math.Sin(gm) * (1 / dmax - 1 / dmin) * 1e3;
             double L1 = (ns / 2) * (ns / 2) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * a1 * 4 * Math.PI * 1e-7;
             double L2 = 0.5 * (ns / 2) * (ns / 2) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * a2 * 4 * Math.PI * 1e-7;
-
+            
             Results.dmin = dmin;
             Results.dmax = dmax;
             Results.L1 = L1;
@@ -190,8 +167,8 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             Results.Ld = 1.5 * (L1 - L2);
             Results.Lq = 1.5 * (L1 + L2);
 
+            // psiM
             double psim = 2 * Math.Sin(gammaM * Math.PI / 180 / 2) * ns * Bdelta * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6;
-
             Results.psiM = psim;
 
             // current demagnetizing            

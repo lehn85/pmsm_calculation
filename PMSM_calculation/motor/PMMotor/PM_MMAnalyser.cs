@@ -488,24 +488,28 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             var stator = Analyser.Motor.Stator as Stator3Phase;
             double ns = 4 / Math.PI * kp * stator.NStrands * q * pp;
             var Motor = Analyser.Motor;
-            var rotor = Motor.Rotor as VPMRotor;
 
-            double gm = rotor.gammaMerad;
-            double[] arr_dmin = new double[Count];
-            double[] arr_dmax = new double[Count];
-            for (int i = 0; i < arrL1.Length; i++)
+
+            var vpmrotor = Motor.Rotor as VPMRotor;
+            if (vpmrotor != null)
             {
-                double mL1 = arrL1[i];
-                double mL2 = arrL2[i];
-                double a1 = mL1 / ((ns / 2 / pp) * (ns / 2 / pp) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
-                double a2 = mL2 / (0.5 * (ns / 2 / pp) * (ns / 2 / pp) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
+                double gm = vpmrotor.gammaMerad;
+                double[] arr_dmin = new double[Count];
+                double[] arr_dmax = new double[Count];
+                for (int i = 0; i < arrL1.Length; i++)
+                {
+                    double mL1 = arrL1[i];
+                    double mL2 = arrL2[i];
+                    double a1 = mL1 / ((ns / 2 / pp) * (ns / 2 / pp) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
+                    double a2 = mL2 / (0.5 * (ns / 2 / pp) * (ns / 2 / pp) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
 
-                arr_dmin[i] = 1 / (a1 + a2 * gm / (2 * Math.Sin(gm)));
-                arr_dmax[i] = 1 / (a1 - a2 * (Math.PI - gm) / (2 * Math.Sin(gm)));
+                    arr_dmin[i] = 1 / (a1 + a2 * gm / (2 * Math.Sin(gm)));
+                    arr_dmax[i] = 1 / (a1 - a2 * (Math.PI - gm) / (2 * Math.Sin(gm)));
+                }
+
+                dict.Add("dmin(I)", new ListPointD(arrI, arr_dmin));
+                dict.Add("dmax(I)", new ListPointD(arrI, arr_dmax));
             }
-
-            dict.Add("dmin(I)", new ListPointD(arrI, arr_dmin));
-            dict.Add("dmax(I)", new ListPointD(arrI, arr_dmax));
 
             return dict;
         }

@@ -445,13 +445,16 @@ namespace calc_from_geometryOfMotor.motor.PMMotor
             double a1 = mL1 / ((ns / 2 / p) * (ns / 2 / p) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
             double a2 = mL2 / (0.5 * (ns / 2 / p) * (ns / 2 / p) * Math.PI * Motor.Rotor.RGap * Motor.GeneralParams.MotorLength * 1e-6 * 4 * Math.PI * 1e-7);
 
-            var rotor = Motor.Rotor as VPMRotor;
-            double gm = rotor.gammaMerad;
-            double dmin = 1 / (a1 + a2 * gm / (2 * Math.Sin(gm)));
-            double dmax = 1 / (a1 - a2 * (Math.PI - gm) / (2 * Math.Sin(gm)));
+            var vpmrotor = Motor.Rotor as VPMRotor;
+            if (vpmrotor != null)
+            {
+                double gm = vpmrotor.gammaMerad;
+                double dmin = 1 / (a1 + a2 * gm / (2 * Math.Sin(gm)));
+                double dmax = 1 / (a1 - a2 * (Math.PI - gm) / (2 * Math.Sin(gm)));
 
-            dict.Add("dmin", dmin);
-            dict.Add("dmax", dmax);
+                dict.Add("dmin", dmin);
+                dict.Add("dmax", dmax);
+            }
 
             return dict;
         }
