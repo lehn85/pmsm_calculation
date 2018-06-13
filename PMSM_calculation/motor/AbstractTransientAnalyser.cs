@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.IO;
 using fastJSON;
+using System.Drawing;
 
 namespace calc_from_geometryOfMotor.motor
 {
@@ -29,6 +30,8 @@ namespace calc_from_geometryOfMotor.motor
 
         public double SkewAngle { get; set; }
         public int NSkewSegment { get; set; }
+
+        public bool ExportGif { get; set; }
 
         //readonly
         public double RotorSpeedRadSecond { get { return RotorSpeed * 2.0 * Math.PI / 60; } }
@@ -60,7 +63,7 @@ namespace calc_from_geometryOfMotor.motor
         protected sealed override void analyze()
         {
             // for multi-thread config
-            int threadCount = 1;
+            int threadCount = 4;
             ManualResetEvent[] MREs = new ManualResetEvent[threadCount];
             Queue<int> steps = new Queue<int>();
             for (int i = 0; i < StepCount + 1; i++)
@@ -73,7 +76,7 @@ namespace calc_from_geometryOfMotor.motor
                 ManualResetEvent mre = MREs[i];
                 new Thread(delegate ()
                 {
-                    FEMM femm = new FEMM();                    
+                    FEMM femm = new FEMM();
                     while (steps.Count > 0)
                     {
                         int step = steps.Dequeue();
@@ -88,7 +91,9 @@ namespace calc_from_geometryOfMotor.motor
             for (int i = 0; i < threadCount; i++)
                 MREs[i].WaitOne();
 
-            OnFinishAnalysis();
+            // combine .bmp images to gif
+            if (ExportGif)
+                combineBmpAsGif();
         }
 
         /// <summary>
@@ -143,10 +148,13 @@ namespace calc_from_geometryOfMotor.motor
                 //log.Info(String.Format("Time {0:F5}: {1}", t, torque));
 
                 // save as bitmap
-                femm.mo_clearblock();
-                femm.mo_zoom(0, -65, 100, 65);
-                femm.mo_showdensityplot(true, false, 0, 2.1, FEMM.DensityPlotType.bmag);                
-                femm.mo_savebitmap(Path.GetDirectoryName(stepfileFEM) + "\\" + Path.GetFileNameWithoutExtension(stepfileFEM) + ".bmp");
+                if (ExportGif)
+                {
+                    femm.mo_clearblock();
+                    femm.mo_zoom(0, -Motor.Stator.RYoke, Motor.Stator.RYoke, Motor.Stator.RYoke);
+                    femm.mo_showdensityplot(true, false, 0, 2.1, FEMM.DensityPlotType.bmag);
+                    femm.mo_savebitmap(Path.GetDirectoryName(stepfileFEM) + "\\" + Path.GetFileNameWithoutExtension(stepfileFEM) + ".bmp");
+                }
 
                 // close
                 femm.mo_close();
@@ -167,7 +175,7 @@ namespace calc_from_geometryOfMotor.motor
                     TransientStepArgs args = PrepareStepArgs(step);
                     double sk = (k - NSkewSegment) * SkewAngle / (2 * NSkewSegment);
                     args.skewAngleAdded = sk;
-                    args.RotorAngle += sk;                    
+                    args.RotorAngle += sk;
 
                     // open femm file
                     femm.open(Path_OriginalFEMFile);
@@ -204,7 +212,7 @@ namespace calc_from_geometryOfMotor.motor
                         {
                             total_args.CircuitProperties[key].fluxlinkage = 0;
                         }
-                    }                    
+                    }
 
                     femm.mo_close();
 
@@ -223,6 +231,30 @@ namespace calc_from_geometryOfMotor.motor
 
                 // after analyzing
                 OnFinishAnalyzeOneStep(this, total_args);
+            }
+        }
+
+        private void combineBmpAsGif()
+        {
+            string giffile = Path_ToAnalysisVariant + "\\ani.gif";
+            using (Stream s = new FileStream(giffile, FileMode.Create))
+            using (helper.GifWriter gw = new helper.GifWriter(s, 40))
+            {
+                for (int i = 0; i < StepCount + 1; i++)
+                {
+                    string bmpfile = Path_ToAnalysisVariant + "\\" + string.Format("{0:D4}.bmp", i);
+                    using(Image img = Image.FromFile(bmpfile))
+                    {
+                        gw.WriteFrame(img);
+                    }
+                    
+                    // try delete bmp files
+                    try
+                    {
+                        File.Delete(bmpfile);
+                    }
+                    catch { }
+                }
             }
         }
 

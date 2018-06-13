@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="GA\GA.cs" />
     <Compile Include="GA\Individual.cs" />
+    <Compile Include="helper\GifWriter.cs" />
     <Compile Include="helper\Prompt.cs" />
     <Compile Include="LuaConsole.cs">
       <SubType>Form</SubType>
